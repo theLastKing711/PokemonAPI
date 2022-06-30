@@ -13,8 +13,13 @@ const PokemonPagination: React.FC<Props> = ({ count, page, onPageChange }) => {
   };
 
   return (
-    <div className="w-full flex justify-center mt-6">
-      <Pagination page={page} count={count} onChange={handleChange} />
+    <div className="w-full flex justify-center mt-6 my-8">
+      <Pagination
+        page={page}
+        count={count}
+        onChange={handleChange}
+        size="large"
+      />
     </div>
   );
 };

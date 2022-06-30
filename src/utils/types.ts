@@ -13,7 +13,8 @@ export interface PokemonDetails extends Pokemon {
     is_default: boolean,
     sprites: Sprite,
     species: Spicie
-    abilities: Ability[]
+    abilities: Ability[],
+    color: string
 }
 
 export interface Sprite {

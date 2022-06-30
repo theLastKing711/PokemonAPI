@@ -34,12 +34,14 @@ const Details = () => {
     );
   });
 
+  console.log("pokemone", pokemon);
+
   return (
     <section className="container mx-auto px-4 py-4">
       <Link to="/" className="text-3xl cursor-pointer my-5">
         Back
       </Link>
-      <Card>
+      <Card style={{ backgroundColor: pokemon?.color }}>
         <CardContent className="flex flex-col">
           <div className="grid justify-center px-8 md:grid-cols-2">
             <div>

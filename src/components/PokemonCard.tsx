@@ -15,10 +15,13 @@ const PokemonCard: React.FC<Props> = ({
   order,
   sprites,
   weight,
+  color,
 }) => {
+  console.log("color", color);
+
   return (
     <article>
-      <Card>
+      <Card style={{ backgroundColor: color }}>
         <CardContent className="flex flex-col">
           <div className="border-b-4">
             <img

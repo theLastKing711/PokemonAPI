@@ -55,7 +55,7 @@ function App() {
             <PokemonCard {...pokemon} key={pokemon.id} />
           ))}
         </section>
-        <footer>
+        <footer className="my-8">
           <PokemonPagination
             count={pageNumbers}
             page={page}

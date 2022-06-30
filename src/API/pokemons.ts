@@ -15,12 +15,12 @@ Promise<[PokemonDetails[], number, number|null, number|null]> => {
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
     
     const { data } = res;
-        
+    
     const result: Pokemon[] = data.results
     const count: number = data.count;
     const next: number | null = data.next;
     const previous: number | null = data.previous;
-
+    
     const subRequests = result.map(item => 
         axios.get(item.url).then(res => {
             // axios.get(res.data.spicies.url)
@@ -35,6 +35,20 @@ Promise<[PokemonDetails[], number, number|null, number|null]> => {
         pokemons = [...resuls]
     })
     
+    const colorRequests = pokemons.map(item => 
+        axios.get(item.species.url).then(res => {
+            return res.data
+        })
+    )
+    
+    await Promise.all(colorRequests).then(result => {
+       result.map((spicie,index) => {
+        pokemons[index] = {...pokemons[index], color: spicie.color.name}
+       })
+    })
+
+    console.log("pokemons", pokemons)
+    
     return [pokemons, count, next ,previous];
    
 }
@@ -46,11 +60,11 @@ export const getPokemon = async (id: string): Promise<PokemonDetails> => {
     const { data } = res;
     
     const pokemonDetails: PokemonDetails = data
-        
-    // const subRequest =  await axios.get(result.species.url)
+    
+    const {data: spicie} = await axios.get(pokemonDetails.species.url)
 
-    // const pokemonDetails: PokemonDetails = subRequest.data.results
-
+    pokemonDetails.color = spicie.color.name;
+    
     return pokemonDetails
     
 }
